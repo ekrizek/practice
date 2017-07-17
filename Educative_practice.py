@@ -1,16 +1,19 @@
 import csv
 
-def csv_dict_reader(file_obj):
+def csv_writer(data, path):
     """
-    Read a CSV file using csv.DictReader
+    Write data to a CSV file path
     """
-    reader = csv.DictReader(file_obj, delimiter=',')
-    for line in reader:
-        print(line["siteId"]),
-        print(line["studentId"]),
-        print(line["date"])
+    with open(path, "w") as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+        for line in data:
+            writer.writerow(line)
 
-if __name__ == "__main__":
-    with open("ORF-CES-W.csv") as f_obj:
-        csv_dict_reader(f_obj)
+if __name__ == '__main__':
+    data = ["first_name,last_name,city".split(","),
+            "Tyrese,Hirthe,Strackeport".split(","),
+            "Jules,Dicki,Lake Nickolasville".split(","),
+            "Dedric,Medhurst,Stiedemannberg".split(",")]
 
+    path = "output.csv"
+    csv_writer(data, path)
